@@ -13,18 +13,21 @@
         android:theme="@style/Theme.Contatos"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AddContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:noHistory="true">
-        </activity>
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>
