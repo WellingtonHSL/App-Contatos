@@ -3,7 +3,6 @@ package com.wellingtonhenrique.contatos.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +14,7 @@ class ContactAdapter(private var contacts: List<Contact>) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_person)
+        val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_add_person)
         val textName: TextView = itemView.findViewById(R.id.tv_name)
         val textPhone: TextView = itemView.findViewById(R.id.tv_phone)
     }
