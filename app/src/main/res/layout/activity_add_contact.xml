@@ -6,13 +6,30 @@
     android:id="@+id/add_contact"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddContactActivity"
-    android:padding="16dp">
+    tools:context=".ui.AddContactActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/material_toolbar_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_add"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Novo Contato"
+            app:titleTextAppearance="@style/ToolbarTitleBold"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleCentered="true"
+            android:background="?attr/colorPrimary"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:id="@+id/edit_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/material_toolbar_add"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp">
 
@@ -41,6 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_img"
         android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         card_view:cardCornerRadius="30dp"
         card_view:cardElevation="6dp">
 
@@ -77,6 +96,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_name"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         card_view:cardCornerRadius="30dp"
         card_view:cardElevation="6dp">
 
@@ -101,7 +122,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:hint="Telefone"
-
+                android:inputType="phone"
                 android:padding="10dp"
                 android:background="@android:color/transparent" />
         </LinearLayout>
@@ -114,6 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
+        android:padding="16dp"
         android:orientation="horizontal"
         android:paddingHorizontal="30dp">
 

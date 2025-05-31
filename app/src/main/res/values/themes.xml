@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Contatos" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!--  Primary brand color.  -->
+        <item name="colorPrimary">@color/red_light</item>
+        <item name="colorPrimaryVariant">@color/red_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Fundo -->
+        <item name="android:colorBackground">@color/light_colorBackground</item>
+
+        <!-- Navegação e status para edge to edge -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/red_dark</item>
+        <item name="android:navigationBarColor">@color/red_dark</item>
     </style>
 
     <style name="Theme.Contatos" parent="Base.Theme.Contatos" />

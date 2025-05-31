@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Cores principais -->
+    <color name="red_light">#E50914</color>
+    <color name="red_dark">#B20710</color>
+    <color name="white">#FFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Cores customizadas -->
+    <color name="light_colorBackground">#E6E6E6</color>
+    <color name="dark_colorBackground">#333333</color>
 </resources>

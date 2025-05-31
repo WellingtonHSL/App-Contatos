@@ -7,11 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/material_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:title="Telefone"
+            app:titleTextAppearance="@style/ToolbarTitleBold"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleCentered="true"
+            android:background="?attr/colorPrimary"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_contacts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp" />
+        android:layout_below="@id/material_toolbar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_contact"
@@ -20,7 +36,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="36dp"
-        android:src="@drawable/add"
-        android:contentDescription="Adicionar" />
+        android:src="@drawable/add_48"
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="@android:color/white"
+        app:fabCustomSize="64dp"/>
 
 </RelativeLayout>
