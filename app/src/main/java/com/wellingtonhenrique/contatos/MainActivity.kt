@@ -16,6 +16,7 @@ import com.wellingtonhenrique.contatos.adapter.ContactAdapter
 import com.wellingtonhenrique.contatos.data.AppDatabase
 import com.wellingtonhenrique.contatos.data.ContactDao
 import com.wellingtonhenrique.contatos.ui.AddContactActivity
+import com.wellingtonhenrique.contatos.ui.DetailContactActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +41,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         contactDao = AppDatabase.getDatabase(this).contactDao()
-        contactAdapter = ContactAdapter(emptyList())
+        contactAdapter = ContactAdapter(emptyList()) { contact ->
+            val intent = Intent(this, DetailContactActivity::class.java).apply {
+                putExtra("contact_id", contact.id)
+            }
+            startActivity(intent)
+        }
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_contacts)
         recyclerView.layoutManager = LinearLayoutManager(this)

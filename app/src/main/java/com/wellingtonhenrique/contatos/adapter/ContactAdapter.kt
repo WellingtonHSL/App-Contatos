@@ -10,8 +10,10 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.wellingtonhenrique.contatos.R
 import com.wellingtonhenrique.contatos.data.Contact
 
-class ContactAdapter(private var contacts: List<Contact>) :
-    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(
+    private var contacts: List<Contact>,
+    private val onItemClick: (Contact) -> Unit
+) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_add_person)
@@ -34,6 +36,10 @@ class ContactAdapter(private var contacts: List<Contact>) :
             .load(contact.imageUrl)
             .placeholder(R.drawable.ic_person)
             .into(holder.imageView)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(contact)
+        }
     }
 
     override fun getItemCount(): Int = contacts.size
