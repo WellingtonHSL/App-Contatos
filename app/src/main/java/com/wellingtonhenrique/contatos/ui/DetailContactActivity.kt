@@ -12,19 +12,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
 import com.wellingtonhenrique.contatos.R
 import com.wellingtonhenrique.contatos.data.AppDatabase
 import com.wellingtonhenrique.contatos.data.Contact
+import com.wellingtonhenrique.contatos.utils.ImageUtils
+import com.wellingtonhenrique.contatos.utils.ImageUtils.saveImageToInternalStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 class DetailContactActivity : AppCompatActivity() {
 
     private var currentContact: Contact? = null
     private var isEditing = false
-    private lateinit var imagePickerLauncher: androidx.activity.result.ActivityResultLauncher<String>
     private var selectedImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +72,11 @@ class DetailContactActivity : AppCompatActivity() {
                     edtName.setText(it.name)
                     edtPhone.setText(it.phone)
                     if (it.imageUrl.isNotEmpty()) {
-                        edtImage.setImageURI(Uri.parse(it.imageUrl))
+                        Glide.with(this)
+                            .load(File(it.imageUrl))
+                            .placeholder(R.drawable.ic_person)
+                            .error(R.drawable.ic_person)
+                            .into(edtImage)
                     } else {
                         edtImage.setImageResource(R.drawable.ic_person)
                     }
@@ -77,14 +84,13 @@ class DetailContactActivity : AppCompatActivity() {
             }
         }
 
-        imagePickerLauncher = registerForActivityResult(
-            ActivityResultContracts.GetContent()
-        ) { uri: Uri? ->
-            if (uri != null && isEditing) {
-                selectedImageUri = uri
-                edtImage.setImageURI(uri)
+        val imagePickerLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                if (uri != null && isEditing) {
+                    selectedImageUri = uri
+                    edtImage.setImageURI(uri)
+                }
             }
-        }
 
         edtImage.setOnClickListener {
             if (isEditing) {
@@ -101,7 +107,12 @@ class DetailContactActivity : AppCompatActivity() {
             } else {
                 val updatedName = edtName.text.toString()
                 val updatedPhone = edtPhone.text.toString()
-                val updatedImage = selectedImageUri?.toString() ?: currentContact?.imageUrl ?: ""
+                val updatedImage = selectedImageUri?.let { uri ->
+                    currentContact?.imageUrl?.let { oldPath ->
+                        ImageUtils.deleteImageFromInternalStorage(oldPath)
+                    }
+                    saveImageToInternalStorage(this@DetailContactActivity, uri)
+                } ?: currentContact?.imageUrl ?: ""
 
                 if (updatedName.isNotEmpty() && updatedPhone.isNotEmpty()) {
                     val updatedContact = currentContact?.copy(
@@ -135,7 +146,11 @@ class DetailContactActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     dao.deleteContact(contact)
                     runOnUiThread {
-                        Toast.makeText(this@DetailContactActivity, "Contato excluído!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@DetailContactActivity,
+                            "Contato excluído!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         finish()
                     }
                 }

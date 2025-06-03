@@ -1,5 +1,6 @@
 package com.wellingtonhenrique.contatos.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -17,10 +18,13 @@ import com.wellingtonhenrique.contatos.R
 import com.wellingtonhenrique.contatos.data.AppDatabase
 import com.wellingtonhenrique.contatos.data.Contact
 import com.wellingtonhenrique.contatos.data.ContactDao
+import com.wellingtonhenrique.contatos.utils.ImageUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 
 class AddContactActivity : AppCompatActivity() {
 
@@ -69,7 +73,7 @@ class AddContactActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 if (uri != null) {
                     edtImage.setImageURI(uri)
-                    edtImage.tag = uri.toString()
+                    edtImage.tag = uri
                 }
             }
 
@@ -84,13 +88,15 @@ class AddContactActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val name = edtName.text.toString()
             val phone = edtPhone.text.toString()
-            val imageUri = edtImage.tag?.toString() ?: ""
+            val imagePath = (edtImage.tag as? Uri)?.let { uri ->
+                ImageUtils.saveImageToInternalStorage(this, uri)
+            } ?: ""
 
             if (name.isNotEmpty() && phone.isNotEmpty()) {
                 val contact = Contact(
                     name = name,
                     phone = phone,
-                    imageUrl = imageUri
+                    imageUrl = imagePath
                 )
 
                 CoroutineScope(Dispatchers.IO).launch {
