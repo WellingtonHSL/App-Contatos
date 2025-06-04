@@ -123,6 +123,7 @@
                 android:layout_marginStart="8dp"
                 android:hint="Telefone"
                 android:inputType="phone"
+                android:maxLength="11"
                 android:padding="10dp"
                 android:background="@android:color/transparent" />
         </LinearLayout>
