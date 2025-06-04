@@ -36,7 +36,7 @@ class DetailContactActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_contact)
         setSupportActionBar(findViewById(R.id.toolbar_detail))
 
-        window.statusBarColor = getColor(R.color.red_dark)
+        window.statusBarColor = getColor(R.color.black)
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detail_contact)) { v, insets ->

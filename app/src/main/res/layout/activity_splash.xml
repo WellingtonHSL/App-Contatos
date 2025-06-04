@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/white"
     tools:context=".ui.SplashActivity">
 
     <ImageView
-        android:layout_width="240dp"
-        android:layout_height="240dp"
+        android:layout_width="380dp"
+        android:layout_height="380dp"
         android:src="@drawable/logo_contato"
 
         />

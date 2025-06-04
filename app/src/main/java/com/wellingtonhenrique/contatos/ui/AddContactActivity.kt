@@ -44,7 +44,7 @@ class AddContactActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar_add))
 
 
-        window.statusBarColor = getColor(R.color.red_dark)
+        window.statusBarColor = getColor(R.color.black)
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.add_contact)) { v, insets ->
